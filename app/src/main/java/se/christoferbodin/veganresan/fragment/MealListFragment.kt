@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_meal_list.meal_list
+import kotlinx.android.synthetic.main.fragment_meal_list.meal_list_error
+import kotlinx.android.synthetic.main.fragment_meal_list.meal_list_retry
 import kotlinx.android.synthetic.main.fragment_meal_list.refresh_layout
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.adapter.MealListAdapter
@@ -34,6 +36,10 @@ class MealListFragment : Fragment() {
             loadMeals(true)
         }
 
+        meal_list_retry.setOnClickListener {
+            loadMeals(true)
+        }
+
         meal_list.setHasFixedSize(true)
         meal_list.adapter = mealListAdapter
         meal_list.layoutManager = LinearLayoutManager(context)
@@ -46,10 +52,11 @@ class MealListFragment : Fragment() {
                     mealListAdapter.data = meals.data
                     mealListAdapter.notifyDataSetChanged()
                     refresh_layout.isRefreshing = meals.status == Status.LOADING
+                    meal_list_error.visibility = View.GONE
                 }
                 Status.ERROR -> {
                     refresh_layout.isRefreshing = false
-                    // TODO: Handle error
+                    meal_list_error.visibility = View.VISIBLE
                 }
             }
         })
