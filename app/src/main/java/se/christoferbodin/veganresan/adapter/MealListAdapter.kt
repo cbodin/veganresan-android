@@ -27,7 +27,7 @@ class MealListAdapter : RecyclerView.Adapter<MealItemHolder>() {
     }
 
     override fun onBindViewHolder(holder: MealItemHolder, position: Int) {
-        holder.bind(data!![position])
+        holder.bind(data!![position], itemCount - position)
     }
 
 }
@@ -37,7 +37,7 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val nameView: TextView = itemView.meal_name
     private val dateView: TextView = itemView.meal_date
 
-    fun bind(meal: Meal) {
+    fun bind(meal: Meal, position: Int) {
         Glide.with(imageView)
             .load(meal.photo)
             .into(imageView)
@@ -45,7 +45,7 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date = DateFormat.getLongDateFormat(itemView.context).format(meal.published)
         val time = DateFormat.getTimeFormat(itemView.context).format(meal.published)
 
-        nameView.text = meal.name
+        nameView.text = "#$position: ${meal.name}"
         dateView.text = "$date, $time"
     }
 }
