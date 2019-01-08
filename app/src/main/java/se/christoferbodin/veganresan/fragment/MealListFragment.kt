@@ -14,28 +14,19 @@ import kotlinx.android.synthetic.main.fragment_meal_list.view.meal_list
 import kotlinx.android.synthetic.main.fragment_meal_list.view.refresh_layout
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.adapter.MealListAdapter
+import se.christoferbodin.veganresan.api.Status
 import se.christoferbodin.veganresan.viewmodel.MealViewModel
 
 class MealListFragment : Fragment() {
     private var mealListAdapter: MealListAdapter = MealListAdapter()
     private lateinit var refreshLayout: SwipeRefreshLayout
     private lateinit var recyclerView: RecyclerView
-    private lateinit var model: MealViewModel
+    private lateinit var viewModel: MealViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        model = ViewModelProviders.of(this).get(MealViewModel::class.java)
-        model.meals(savedInstanceState == null).observe(this, Observer { meals ->
-            mealListAdapter.data = meals
-            mealListAdapter.notifyDataSetChanged()
-        })
-        model.mealsError().observe(this, Observer { error ->
-            // TODO: Handle error
-        })
-        model.mealsLoading().observe(this, Observer { loading ->
-            refreshLayout.isRefreshing = loading
-        })
+        viewModel = ViewModelProviders.of(this).get(MealViewModel::class.java)
+        loadMeals(savedInstanceState == null)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,12 +36,29 @@ class MealListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         refreshLayout = view.refresh_layout
         refreshLayout.setOnRefreshListener {
-            model.meals(true)
+            loadMeals(true)
         }
 
         recyclerView = view.meal_list
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = mealListAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun loadMeals(refresh: Boolean) {
+        viewModel.loadMeals(refresh).observe(this, Observer { meals ->
+            when (meals.status) {
+                Status.SUCCESS -> {
+                    mealListAdapter.data = meals.data
+                    mealListAdapter.notifyDataSetChanged()
+                    refreshLayout.isRefreshing = false
+                }
+                Status.ERROR -> {
+                    refreshLayout.isRefreshing = false
+                    // TODO: Handle error
+                }
+                Status.LOADING -> refreshLayout.isRefreshing = true
+            }
+        })
     }
 }
