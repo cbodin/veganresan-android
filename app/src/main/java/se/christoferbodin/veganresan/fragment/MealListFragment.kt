@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.android.synthetic.main.fragment_meal_list.view.meal_list
-import kotlinx.android.synthetic.main.fragment_meal_list.view.refresh_layout
+import kotlinx.android.synthetic.main.fragment_meal_list.meal_list
+import kotlinx.android.synthetic.main.fragment_meal_list.refresh_layout
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.adapter.MealListAdapter
 import se.christoferbodin.veganresan.api.Status
@@ -19,8 +17,6 @@ import se.christoferbodin.veganresan.viewmodel.MealViewModel
 
 class MealListFragment : Fragment() {
     private var mealListAdapter: MealListAdapter = MealListAdapter()
-    private lateinit var refreshLayout: SwipeRefreshLayout
-    private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: MealViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,30 +30,27 @@ class MealListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        refreshLayout = view.refresh_layout
-        refreshLayout.setOnRefreshListener {
+        refresh_layout.setOnRefreshListener {
             loadMeals(true)
         }
 
-        recyclerView = view.meal_list
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = mealListAdapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        meal_list.setHasFixedSize(true)
+        meal_list.adapter = mealListAdapter
+        meal_list.layoutManager = LinearLayoutManager(context)
     }
 
     private fun loadMeals(refresh: Boolean) {
         viewModel.loadMeals(refresh).observe(this, Observer { meals ->
             when (meals.status) {
-                Status.SUCCESS -> {
+                Status.SUCCESS, Status.LOADING -> {
                     mealListAdapter.data = meals.data
                     mealListAdapter.notifyDataSetChanged()
-                    refreshLayout.isRefreshing = false
+                    refresh_layout.isRefreshing = meals.status == Status.LOADING
                 }
                 Status.ERROR -> {
-                    refreshLayout.isRefreshing = false
+                    refresh_layout.isRefreshing = false
                     // TODO: Handle error
                 }
-                Status.LOADING -> refreshLayout.isRefreshing = true
             }
         })
     }
