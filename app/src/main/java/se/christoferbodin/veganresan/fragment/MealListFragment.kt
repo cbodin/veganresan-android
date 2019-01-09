@@ -49,7 +49,9 @@ class MealListFragment : Fragment() {
         viewModel.loadMeals(refresh).observe(this, Observer { meals ->
             when (meals.status) {
                 Status.SUCCESS, Status.LOADING -> {
-                    mealListAdapter.data = meals.data
+                    if (meals.status !== Status.LOADING) {
+                        mealListAdapter.data = meals.data
+                    }
                     mealListAdapter.notifyDataSetChanged()
                     refresh_layout.isRefreshing = meals.status == Status.LOADING
                     meal_list_error.visibility = View.GONE
