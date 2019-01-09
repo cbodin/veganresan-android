@@ -4,13 +4,12 @@ import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_meal.view.meal_date
 import kotlinx.android.synthetic.main.item_meal.view.meal_image
 import kotlinx.android.synthetic.main.item_meal.view.meal_name
+import kotlinx.android.synthetic.main.item_meal.view.meal_time
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.model.Meal
 
@@ -33,19 +32,18 @@ class MealListAdapter : RecyclerView.Adapter<MealItemHolder>() {
 }
 
 class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val imageView: ImageView = itemView.meal_image
-    private val nameView: TextView = itemView.meal_name
-    private val dateView: TextView = itemView.meal_date
+    private val imageView = itemView.meal_image
+    private val nameView = itemView.meal_name
+    private val dateView = itemView.meal_date
+    private val timeView = itemView.meal_time
 
     fun bind(meal: Meal, position: Int) {
         Glide.with(imageView)
             .load(meal.photo)
             .into(imageView)
 
-        val date = DateFormat.getLongDateFormat(itemView.context).format(meal.published)
-        val time = DateFormat.getTimeFormat(itemView.context).format(meal.published)
-
         nameView.text = meal.name
-        dateView.text = String.format("%s, %s", date, time)
+        dateView.text = DateFormat.getMediumDateFormat(itemView.context).format(meal.published)
+        timeView.text = DateFormat.getTimeFormat(itemView.context).format(meal.published)
     }
 }

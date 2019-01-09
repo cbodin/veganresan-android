@@ -43,11 +43,23 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
             android:drawableStart="@drawable/ic_date"
-            android:drawablePadding="8dp"
+            android:drawablePadding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/meal_name"
             app:layout_constraintTop_toBottomOf="@id/meal_name"
             tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/meal_time"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_time"
+            android:drawablePadding="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/meal_date"
+            tools:text="@tools:sample/date/hhmm" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
