@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Veganresan</string>
 
+    <string name="action_upload">Upload meal</string>
     <string name="api_error">Oops! An error occurred</string>
     <string name="retry">Retry</string>
 </resources>
