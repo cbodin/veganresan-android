@@ -45,7 +45,7 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date = DateFormat.getLongDateFormat(itemView.context).format(meal.published)
         val time = DateFormat.getTimeFormat(itemView.context).format(meal.published)
 
-        nameView.text = "#$position: ${meal.name}"
-        dateView.text = "$date, $time"
+        nameView.text = meal.name
+        dateView.text = String.format("%s, %s", date, time)
     }
 }
