@@ -1,3 +1,4 @@
 <resources>
     <string name="api_base_url">https://veganresan.christoferbodin.se</string>
+    <string name="old_api_base_url">https://veganresan.moreclients.se</string>
 </resources>

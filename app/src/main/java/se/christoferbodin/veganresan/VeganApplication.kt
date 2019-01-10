@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import se.christoferbodin.veganresan.api.MealApi
 import se.christoferbodin.veganresan.api.MealRepository
+import se.christoferbodin.veganresan.api.OldMealApi
 import java.util.Date
 
 class VeganApplication: Application() {
@@ -26,7 +27,22 @@ class VeganApplication: Application() {
         retrofit.create(MealApi::class.java)
     }
 
+    val oldMealApi: OldMealApi by lazy {
+        val moshi = Moshi.Builder()
+            .add(Date::class.java, Rfc3339DateJsonAdapter())
+            .build()
+
+        val baseUrl = getString(R.string.old_api_base_url)
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+
+        retrofit.create(OldMealApi::class.java)
+    }
+
     val mealRepository by lazy {
-        MealRepository(mealApi)
+        MealRepository(mealApi, oldMealApi)
     }
 }
