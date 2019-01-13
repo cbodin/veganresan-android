@@ -13,8 +13,3 @@ data class Meal(
     val published: Date,
     val links: List<Link>
 )
-
-enum class MealType {
-    RESTAURANT,
-    HOMEMADE
-}
