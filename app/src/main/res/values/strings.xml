@@ -4,4 +4,9 @@
     <string name="action_upload">Upload meal</string>
     <string name="api_error">Oops! An error occurred</string>
     <string name="retry">Retry</string>
+
+    <string name="dialog_update_title">A new version is available!</string>
+    <string name="dialog_update_text">You\'re currently on %s, version %s is available:</string>
+    <string name="dialog_update_update">Update</string>
+    <string name="dialog_update_cancel">Cancel</string>
 </resources>
