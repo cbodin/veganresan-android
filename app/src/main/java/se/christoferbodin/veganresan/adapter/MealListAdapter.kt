@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_meal.view.meal_date
 import kotlinx.android.synthetic.main.item_meal.view.meal_image
 import kotlinx.android.synthetic.main.item_meal.view.meal_name
@@ -40,10 +42,19 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(meal: Meal, position: Int) {
         Glide.with(imageView)
             .load(meal.photo)
+            .transition(transition)
+            .apply(requestOptions)
             .into(imageView)
 
         nameView.text = meal.name
         dateView.text = DateFormat.getMediumDateFormat(itemView.context).format(meal.published)
         timeView.text = DateFormat.getTimeFormat(itemView.context).format(meal.published)
+    }
+
+    companion object {
+        private val requestOptions = RequestOptions()
+            .centerCrop()
+            .error(R.drawable.ic_image_broken)
+        private val transition = DrawableTransitionOptions.withCrossFade()
     }
 }
