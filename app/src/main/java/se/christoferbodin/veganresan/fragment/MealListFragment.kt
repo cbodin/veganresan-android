@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_meal_list.meal_list
 import kotlinx.android.synthetic.main.fragment_meal_list.meal_list_error
 import kotlinx.android.synthetic.main.fragment_meal_list.meal_list_retry
@@ -42,7 +42,7 @@ class MealListFragment : Fragment() {
 
         meal_list.setHasFixedSize(true)
         meal_list.adapter = mealListAdapter
-        meal_list.layoutManager = GridLayoutManager(context, 2)
+        meal_list.layoutManager = LinearLayoutManager(context)
     }
 
     private fun loadMeals(refresh: Boolean) {
