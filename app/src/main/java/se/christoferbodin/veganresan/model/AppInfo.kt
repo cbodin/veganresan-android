@@ -2,6 +2,7 @@ package se.christoferbodin.veganresan.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class AppInfo(
@@ -12,4 +13,4 @@ data class AppInfo(
     @Json(name = "download_url")
     val downloadUrl: String,
     val news: List<String>
-)
+): Serializable
