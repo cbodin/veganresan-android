@@ -7,7 +7,6 @@ import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import se.christoferbodin.veganresan.api.MealApi
-import se.christoferbodin.veganresan.api.MealRepository
 import java.util.Date
 
 class VeganApplication: Application() {
@@ -24,9 +23,5 @@ class VeganApplication: Application() {
             .build()
 
         retrofit.create(MealApi::class.java)
-    }
-
-    val mealRepository by lazy {
-        MealRepository(mealApi)
     }
 }
