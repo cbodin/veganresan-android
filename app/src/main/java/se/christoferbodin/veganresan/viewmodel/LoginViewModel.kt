@@ -8,32 +8,30 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import se.christoferbodin.veganresan.VeganApplication
-import se.christoferbodin.veganresan.model.Meal
+import se.christoferbodin.veganresan.utils.SingleLiveEvent
 import se.christoferbodin.veganresan.utils.default
 
-class MealViewModel(application: Application) : AndroidViewModel(application) {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val api = getApplication<VeganApplication>().mealApi
     private val loading = MutableLiveData<Boolean>().default(false)
-    private val error = MutableLiveData<Boolean>().default(false)
-    private val meals = MutableLiveData<List<Meal>>()
+    private val loggedIn = SingleLiveEvent<Boolean>()
 
     fun isLoading() = loading as LiveData<Boolean>
-    fun hasError() = error as LiveData<Boolean>
-    fun getMeals() = meals as LiveData<List<Meal>>
+    fun onLogin() = loggedIn as LiveData<Boolean>
 
-    fun loadMeals(refresh: Boolean = false) {
-        if (loading.value == true || !refresh && meals.value != null) {
+    fun login(password: String) {
+        if (loading.value == true) {
             return
         }
 
         CoroutineScope(Dispatchers.Main).launch {
             loading.value = true
-            error.value = false
 
             try {
-                meals.value = api.mealList().await()
+                api.loginValidate("Bearer $password").await()
+                loggedIn.value = true
             } catch (exception: Exception) {
-                error.value = true
+                loggedIn.value = false
             }
 
             loading.value = false

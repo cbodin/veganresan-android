@@ -9,4 +9,12 @@
     <string name="dialog_update_text">You\'re currently on %s, version %s is available:</string>
     <string name="dialog_update_update">Update</string>
     <string name="dialog_update_cancel">Cancel</string>
+
+    <string name="dialog_login_title">Login to upload</string>
+    <string name="dialog_login_text">Please enter the upload password before uploading a meal</string>
+    <string name="dialog_login_password_hint">Password</string>
+    <string name="dialog_login_login">Login</string>
+
+    <string name="toast_login_error">Incorrect password. Try again.</string>
+    <string name="toast_login_successful">Login successful!</string>
 </resources>

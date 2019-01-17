@@ -1,4 +1,4 @@
-package se.christoferbodin.veganresan
+package se.christoferbodin.veganresan.utils
 
 import androidx.lifecycle.MutableLiveData
 
