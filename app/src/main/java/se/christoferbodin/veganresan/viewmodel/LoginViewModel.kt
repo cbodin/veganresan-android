@@ -1,6 +1,8 @@
 package se.christoferbodin.veganresan.viewmodel
 
 import android.app.Application
+import android.preference.PreferenceManager
+import androidx.core.content.edit
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +31,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
             try {
                 api.loginValidate("Bearer $password").await()
+                PreferenceManager.getDefaultSharedPreferences(getApplication()).edit {
+                    putString("UPLOAD_PASSWORD", password)
+                }
                 loggedIn.value = true
             } catch (exception: Exception) {
                 loggedIn.value = false
