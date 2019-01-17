@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import se.christoferbodin.veganresan.fragment.AppUpdateFragment
-import se.christoferbodin.veganresan.fragment.LoginFragment
+import se.christoferbodin.veganresan.fragment.DialogLoginFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             .getString("UPLOAD_PASSWORD", null)
 
         if (password == null) {
-            LoginFragment.newInstance().show(supportFragmentManager, null)
+            DialogLoginFragment.newInstance().show(supportFragmentManager, null)
         }
     }
 }

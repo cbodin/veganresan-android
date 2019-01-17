@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.dialog_login.progress_circular
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.viewmodel.LoginViewModel
 
-class LoginFragment : DialogFragment() {
+class DialogLoginFragment : DialogFragment() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var passwordInput: EditText
     private lateinit var progress: ProgressBar
@@ -62,6 +62,6 @@ class LoginFragment : DialogFragment() {
     }
 
     companion object {
-        fun newInstance(): LoginFragment = LoginFragment()
+        fun newInstance(): DialogLoginFragment = DialogLoginFragment()
     }
 }
