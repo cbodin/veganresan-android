@@ -32,9 +32,8 @@ class MealListFragment : Fragment() {
             refresh_layout.isRefreshing = loading
         })
         viewModel.hasError().observe(this, Observer { error ->
-            val visibility =  if (error) View.VISIBLE else View.GONE
-            meal_list.visibility = visibility
-            meal_list_error.visibility = visibility
+            meal_list.visibility = if (error) View.GONE else View.VISIBLE
+            meal_list_error.visibility = if (error) View.VISIBLE else View.GONE
         })
 
         viewModel.loadMeals()
