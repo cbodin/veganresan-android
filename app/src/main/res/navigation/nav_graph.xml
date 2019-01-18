@@ -16,6 +16,6 @@
     <fragment
         android:id="@+id/add_meal_fragment"
         android:name="se.christoferbodin.veganresan.fragment.AddMealFragment"
-        android:label="Add meal" />
+        android:label="@string/label_add_meal" />
 
 </navigation>
