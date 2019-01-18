@@ -17,4 +17,6 @@
 
     <string name="toast_login_error">Incorrect password. Try again.</string>
     <string name="toast_login_successful">Login successful!</string>
+
+    <string name="hint_meal_title">Title</string>
 </resources>

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_meal_list.meal_list
 import kotlinx.android.synthetic.main.fragment_meal_list.meal_list_error
@@ -82,6 +83,8 @@ class MealListFragment : Fragment() {
 
         if (password == null) {
             DialogLoginFragment.newInstance().show(fragmentManager, null)
+        } else {
+            findNavController().navigate(R.id.action_meal_list_fragment_to_add_meal_fragment)
         }
     }
 }

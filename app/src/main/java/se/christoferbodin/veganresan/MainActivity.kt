@@ -1,20 +1,25 @@
 package se.christoferbodin.veganresan
 
 import android.os.Bundle
-import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import kotlinx.android.synthetic.main.activity_main.appbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import se.christoferbodin.veganresan.fragment.AppUpdateFragment
-import se.christoferbodin.veganresan.fragment.DialogLoginFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.appbar))
+        setSupportActionBar(appbar)
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        appbar.setupWithNavController(navController, appBarConfiguration)
 
         if (savedInstanceState == null) {
             checkForUpdates()
