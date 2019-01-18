@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider.getUriForFile
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.fragment_add_meal.meal_image
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.utils.GlideApp
@@ -40,6 +41,9 @@ class AddMealFragment : Fragment() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             GlideApp.with(this)
                 .load(getCachedImageFile())
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
                 .into(meal_image)
         }
     }
