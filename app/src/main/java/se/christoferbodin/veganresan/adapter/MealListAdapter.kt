@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_meal.view.meal_date
 import kotlinx.android.synthetic.main.item_meal.view.meal_image
 import kotlinx.android.synthetic.main.item_meal.view.meal_name
 import kotlinx.android.synthetic.main.item_meal.view.meal_time
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.model.Meal
+import se.christoferbodin.veganresan.utils.GlideApp
 
 class MealListAdapter : RecyclerView.Adapter<MealItemHolder>() {
     var data: List<Meal>? = null
@@ -40,10 +39,11 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val timeView = itemView.meal_time
 
     fun bind(meal: Meal, position: Int) {
-        Glide.with(imageView)
+        GlideApp.with(imageView)
             .load(meal.photo)
             .transition(transition)
-            .apply(requestOptions)
+            .error(R.drawable.ic_image_broken)
+            .centerCrop()
             .into(imageView)
 
         nameView.text = meal.name
@@ -52,9 +52,6 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     companion object {
-        private val requestOptions = RequestOptions()
-            .centerCrop()
-            .error(R.drawable.ic_image_broken)
         private val transition = DrawableTransitionOptions.withCrossFade()
     }
 }

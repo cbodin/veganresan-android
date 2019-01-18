@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider.getUriForFile
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_add_meal.meal_image
 import se.christoferbodin.veganresan.R
+import se.christoferbodin.veganresan.utils.GlideApp
 import java.io.File
 
 class AddMealFragment : Fragment() {
@@ -38,7 +38,7 @@ class AddMealFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Glide.with(this)
+            GlideApp.with(this)
                 .load(getCachedImageFile())
                 .into(meal_image)
         }
