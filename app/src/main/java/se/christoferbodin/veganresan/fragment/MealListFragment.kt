@@ -1,7 +1,11 @@
 package se.christoferbodin.veganresan.fragment
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -22,6 +26,8 @@ class MealListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
 
         viewModel = ViewModelProviders.of(this).get(MealViewModel::class.java)
         viewModel.getMeals().observe(this, Observer { meals ->
@@ -55,5 +61,27 @@ class MealListFragment : Fragment() {
         meal_list.setHasFixedSize(true)
         meal_list.adapter = mealListAdapter
         meal_list.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_upload) {
+            uploadMeal()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun uploadMeal() {
+        val password = PreferenceManager.getDefaultSharedPreferences(context)
+            .getString("UPLOAD_PASSWORD", null)
+
+        if (password == null) {
+            DialogLoginFragment.newInstance().show(fragmentManager, null)
+        }
     }
 }

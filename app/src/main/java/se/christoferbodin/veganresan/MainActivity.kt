@@ -2,8 +2,6 @@ package se.christoferbodin.veganresan
 
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import kotlinx.coroutines.CoroutineScope
@@ -23,20 +21,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.action_upload) {
-            uploadMeal()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
 
     private fun checkForUpdates() {
@@ -53,15 +37,6 @@ class MainActivity : AppCompatActivity() {
             } catch (exception: Exception) {
                 // No required data, retry next time app is opened
             }
-        }
-    }
-
-    private fun uploadMeal() {
-        val password = PreferenceManager.getDefaultSharedPreferences(this)
-            .getString("UPLOAD_PASSWORD", null)
-
-        if (password == null) {
-            DialogLoginFragment.newInstance().show(supportFragmentManager, null)
         }
     }
 }
