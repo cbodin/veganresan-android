@@ -1,11 +1,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/meal_list_fragment">
 
     <fragment
         android:id="@+id/meal_list_fragment"
         android:name="se.christoferbodin.veganresan.fragment.MealListFragment"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_meal_list">
 
         <action
             android:id="@+id/action_meal_list_fragment_to_add_meal_fragment"
@@ -20,6 +22,7 @@
     <fragment
         android:id="@+id/add_meal_fragment"
         android:name="se.christoferbodin.veganresan.fragment.AddMealFragment"
-        android:label="@string/label_add_meal" />
+        android:label="@string/label_add_meal"
+        tools:layout="@layout/fragment_add_meal" />
 
 </navigation>
