@@ -19,18 +19,18 @@ import kotlinx.android.synthetic.main.fragment_meal_list.meal_list_retry
 import kotlinx.android.synthetic.main.fragment_meal_list.refresh_layout
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.adapter.MealListAdapter
-import se.christoferbodin.veganresan.viewmodel.MealViewModel
+import se.christoferbodin.veganresan.viewmodel.MealsViewModel
 
 class MealListFragment : Fragment() {
     private var mealListAdapter: MealListAdapter = MealListAdapter()
-    private lateinit var viewModel: MealViewModel
+    private lateinit var viewModel: MealsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setHasOptionsMenu(true)
 
-        viewModel = ViewModelProviders.of(this).get(MealViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MealsViewModel::class.java)
         viewModel.getMeals().observe(this, Observer { meals ->
             mealListAdapter.data = meals
             mealListAdapter.notifyDataSetChanged()

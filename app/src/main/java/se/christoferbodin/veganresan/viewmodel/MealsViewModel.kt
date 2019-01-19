@@ -11,13 +11,13 @@ import se.christoferbodin.veganresan.VeganApplication
 import se.christoferbodin.veganresan.model.Meal
 import se.christoferbodin.veganresan.utils.default
 
-class MealViewModel(application: Application) : AndroidViewModel(application) {
+class MealsViewModel(application: Application) : AndroidViewModel(application) {
     private val api = getApplication<VeganApplication>().mealApi
     private val loading = MutableLiveData<Boolean>().default(false)
     private val error = MutableLiveData<Boolean>().default(false)
     private val meals = MutableLiveData<List<Meal>>()
 
-    fun isLoading() = loading as LiveData<Boolean>
+    fun isLoading() = loading as LiveData<Boorlean>
     fun hasError() = error as LiveData<Boolean>
     fun getMeals() = meals as LiveData<List<Meal>>
 
