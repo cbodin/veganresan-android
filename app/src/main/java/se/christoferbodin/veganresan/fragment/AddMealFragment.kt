@@ -16,14 +16,26 @@ import se.christoferbodin.veganresan.utils.GlideApp
 import java.io.File
 
 class AddMealFragment : Fragment() {
+    private var imageUri: File? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_add_meal, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        savedInstanceState?.apply {
+            imageUri = getSerializable(KEY_IMAGE_FILE) as File?
+            loadImage()
+        }
+
         meal_image.setOnClickListener {
             captureImage()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(KEY_IMAGE_FILE, imageUri)
     }
 
     private fun captureImage() {
@@ -39,12 +51,8 @@ class AddMealFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            GlideApp.with(this)
-                .load(getCachedImageFile())
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .centerCrop()
-                .into(meal_image)
+            imageUri = getCachedImageFile()
+            loadImage()
         }
     }
 
@@ -57,7 +65,19 @@ class AddMealFragment : Fragment() {
         return newFile
     }
 
+    private fun loadImage() {
+        if (imageUri != null) {
+            GlideApp.with(this)
+                .load(imageUri)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .centerCrop()
+                .into(meal_image)
+        }
+    }
+
     companion object {
         private const val REQUEST_IMAGE_CAPTURE = 1
+        private const val KEY_IMAGE_FILE = "IMAGE_FILE"
     }
 }
