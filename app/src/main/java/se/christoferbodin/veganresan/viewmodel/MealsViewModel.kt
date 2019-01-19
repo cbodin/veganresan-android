@@ -17,7 +17,7 @@ class MealsViewModel(application: Application) : AndroidViewModel(application) {
     private val error = MutableLiveData<Boolean>().default(false)
     private val meals = MutableLiveData<List<Meal>>()
 
-    fun isLoading() = loading as LiveData<Boorlean>
+    fun isLoading() = loading as LiveData<Boolean>
     fun hasError() = error as LiveData<Boolean>
     fun getMeals() = meals as LiveData<List<Meal>>
 
