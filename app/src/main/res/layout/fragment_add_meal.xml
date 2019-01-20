@@ -13,7 +13,7 @@
             android:id="@+id/meal_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#ccc"
+            android:background="#eee"
             android:scaleType="center"
             android:src="@drawable/ic_add_photo"
             app:layout_constraintDimensionRatio="H,4:3"
