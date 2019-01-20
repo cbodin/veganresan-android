@@ -27,11 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:shadowColor="#fff"
+            android:shadowColor="#000"
             android:shadowRadius="2.5"
             android:shadowDx="1"
             android:shadowDy="1"
-            android:textColor="#000"
+            android:textColor="#fff"
             app:layout_constraintLeft_toLeftOf="@id/meal_image"
             app:layout_constraintTop_toTopOf="@id/meal_image"
             tools:text="1/32" />
