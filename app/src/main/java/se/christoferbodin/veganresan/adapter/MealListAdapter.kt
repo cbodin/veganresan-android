@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.android.synthetic.main.item_meal.view.meal_date
 import kotlinx.android.synthetic.main.item_meal.view.meal_image
@@ -41,10 +42,17 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val timeView = itemView.meal_time
 
     fun bind(meal: Meal, position: Int) {
+        val circularProgressDrawable = CircularProgressDrawable(itemView.context)
+        circularProgressDrawable.strokeWidth = 10f
+        circularProgressDrawable.centerRadius = 80f
+        circularProgressDrawable.setColorSchemeColors(0xffccccc)
+        circularProgressDrawable.start()
+
         GlideApp.with(imageView)
             .load(meal.photo)
             .transition(transition)
             .error(R.drawable.ic_image_broken)
+            .placeholder(circularProgressDrawable)
             .centerCrop()
             .into(imageView)
 
