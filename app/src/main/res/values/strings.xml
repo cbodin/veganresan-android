@@ -20,4 +20,6 @@
 
     <string name="label_add_meal">Add meal</string>
     <string name="hint_meal_title">Title</string>
+    <string name="save">Save</string>
+    <string name="meal_uploaded">Meal successfully uploaded!</string>
 </resources>
