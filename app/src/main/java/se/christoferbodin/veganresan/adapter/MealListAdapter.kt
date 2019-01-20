@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.android.synthetic.main.item_meal.view.meal_date
 import kotlinx.android.synthetic.main.item_meal.view.meal_image
 import kotlinx.android.synthetic.main.item_meal.view.meal_name
+import kotlinx.android.synthetic.main.item_meal.view.meal_number
 import kotlinx.android.synthetic.main.item_meal.view.meal_time
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.model.Meal
@@ -34,6 +35,7 @@ class MealListAdapter : RecyclerView.Adapter<MealItemHolder>() {
 
 class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val imageView = itemView.meal_image
+    private val numberView = itemView.meal_number
     private val nameView = itemView.meal_name
     private val dateView = itemView.meal_date
     private val timeView = itemView.meal_time
@@ -47,6 +49,7 @@ class MealItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .into(imageView)
 
         nameView.text = meal.name
+        numberView.text = String.format("%d / %d", position, 32)
         dateView.text = DateFormat.getMediumDateFormat(itemView.context).format(meal.published)
         timeView.text = DateFormat.getTimeFormat(itemView.context).format(meal.published)
     }
