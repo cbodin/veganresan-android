@@ -1,0 +1,8 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableStart="@drawable/ic_link"
+    android:drawablePadding="8dp"
+    android:gravity="center_vertical"
+    tools:text="https://www.veganfoodtoday.com" />

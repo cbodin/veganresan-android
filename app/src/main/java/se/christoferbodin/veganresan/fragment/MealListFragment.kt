@@ -19,10 +19,11 @@ import kotlinx.android.synthetic.main.fragment_meal_list.meal_list_retry
 import kotlinx.android.synthetic.main.fragment_meal_list.refresh_layout
 import se.christoferbodin.veganresan.R
 import se.christoferbodin.veganresan.adapter.MealListAdapter
+import se.christoferbodin.veganresan.model.Meal
 import se.christoferbodin.veganresan.viewmodel.MealsViewModel
 
 class MealListFragment : Fragment() {
-    private var mealListAdapter: MealListAdapter = MealListAdapter()
+    private var mealListAdapter = MealListAdapter(::itemClickListener)
     private lateinit var viewModel: MealsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +85,14 @@ class MealListFragment : Fragment() {
         if (password == null) {
             DialogLoginFragment.newInstance().show(fragmentManager, null)
         } else {
-            findNavController().navigate(R.id.action_meal_list_fragment_to_add_meal_fragment)
+            findNavController().navigate(R.id.action_add_meal)
         }
+    }
+
+    private fun itemClickListener(meal: Meal) {
+        val direction = MealListFragmentDirections.actionMealDetail()
+        direction.meal = meal
+
+        findNavController().navigate(direction)
     }
 }
