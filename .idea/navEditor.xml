@@ -43,7 +43,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_meal_list_fragment_to_add_meal_fragment">
+                            <entry key="action_add_meal">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_meal_detail">
                               <value>
                                 <LayoutPositions />
                               </value>
