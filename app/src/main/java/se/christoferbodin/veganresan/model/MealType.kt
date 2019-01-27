@@ -1,6 +1,10 @@
 package se.christoferbodin.veganresan.model
 
-enum class MealType {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+enum class MealType : Parcelable {
     RESTAURANT,
     HOMEMADE
 }

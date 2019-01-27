@@ -10,8 +10,16 @@
         tools:layout="@layout/fragment_meal_list">
 
         <action
-            android:id="@+id/action_meal_list_fragment_to_add_meal_fragment"
+            android:id="@+id/action_add_meal"
             app:destination="@id/add_meal_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_meal_detail"
+            app:destination="@id/meal_detail_fragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -24,5 +32,18 @@
         android:name="se.christoferbodin.veganresan.fragment.AddMealFragment"
         android:label="@string/label_add_meal"
         tools:layout="@layout/fragment_add_meal" />
+
+    <fragment
+        android:id="@+id/meal_detail_fragment"
+        android:name="se.christoferbodin.veganresan.fragment.MealDetailFragment"
+        tools:layout="@layout/fragment_meal_detail">
+
+        <argument
+            android:name="meal"
+            android:defaultValue="@null"
+            app:argType="se.christoferbodin.veganresan.model.Meal"
+            app:nullable="true" />
+
+    </fragment>
 
 </navigation>
